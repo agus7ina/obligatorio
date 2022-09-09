@@ -35,6 +35,7 @@ function sortCategories(criteria, array){
     return result;
 }
 
+//función que guarda el identificador en el local storage
 function setCatID(id) {
     localStorage.setItem("catID", id);
     window.location = "products.html"
