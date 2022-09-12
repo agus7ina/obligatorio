@@ -16,7 +16,7 @@ function validar() {
     const passwordInput = document.querySelector("#password").value;
     console.log(emailInput);
     // creo una constante url con la dirección de la portada
-    const url = 'http://127.0.0.1:5500/portada.html'
+    const url = window.location = "portada.html"
 
     //si emailInput y passwordInput dan true, se llama a la función redireccionar(), si no, se llama a la función showAlertError()
     if (emailInput && passwordInput) {
