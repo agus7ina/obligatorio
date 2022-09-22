@@ -10,6 +10,8 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  
+
 </head>
 
 <body>
@@ -31,17 +33,63 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <!--link en el que se agrega el valor del item 'email' del local storage-->
+            <a class="nav-link" href="my-profile.html" id="email-myprofile"></a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="pb-5 container">
+      <div class="container" id="productInfo">
+ 
       </div>
+      <div class="container">
+        <div class="row " id="productImages">
+  
+        </div>
+      </div>
+      <div class="container pt-5">
+        <h4 pt-5>Comentarios</h4>
+        <div class="card " style="width: 40rem;">
+          <div class="">
+            
+          <ul class="list-group list-group-flush pb-4" id="productComments">
+
+
+          </ul>
+          </div>
+          
+        </div>
+        <h4 class="pt-4">Comentar</h4>
+        <div class="row">
+          
+          <div class="col-4">
+            
+              <input type="text" class="border rounded-3 cont form-control pb-4" id="comment">
+                
+            </input>
+
+            <div class="row g-3 pb-4">
+              <div class="col-sm-4 ">
+                <label for="userScore" class="form-label pt-4">puntuación:</label>
+                <input type="number" class="form-control" id="userScore">
+              </div>
+              <div class="col-sm-4  pt-4 float-end">
+                <button type="button" class="btn btn-warning my-3" id="sendComment">Enviar Comentario</button>
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+
+      </div>
+     
     </div>
+    
+      
   </main>
   <footer class="text-muted">
     <div class="container">

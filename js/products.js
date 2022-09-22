@@ -8,6 +8,23 @@ let currentProductsArray = [];
 
 
 
+//la variable "categoria" contiene el item "catID" del local storage. Modifico la variable url para que en lugar de ir directo a la url de los autos utilice la variable categoría, concatenando la url geneal de productos ("PRODUCTS_URL"), definida en el init + la variable categoría recién definida + la extensión .json de la url ("EXT_TYPE"), definida en el init. 
+  //la variable url quedaría así: https://japceibal.github.io/emercado-api/cats_products/ + catID + .json
+  let categoria = localStorage.getItem('catID');
+  let url = PRODUCTS_URL + categoria + EXT_TYPE;
+    
+  getJSONData(url).then(function(resultObj){
+    if (resultObj.status === "ok"){
+      console.log(resultObj.data);
+      document.getElementById('products-category').innerHTML += resultObj.data.catName;
+
+      currentProductsArray = resultObj.data.products;
+      showProductsList();
+    }
+  })
+
+
+
 function sortProducts(criteria, array){
   let result = [];
  
@@ -55,17 +72,20 @@ function showProductsList(){
      }
      
      console.log(currentProductsArray);
+     
   for(let i=0; i < currentProductsArray.length; i++){
-    let products = currentProductsArray[i];    
+    let products = currentProductsArray[i]; 
+    let productId = "id" + products.id
     
+
       listado.innerHTML += `
-      <div class="row shadow p-8 rounded overflow-hidden mb-3 bg-white">
+      <div onclick="console.log("click")" class="row shadow p-8 rounded overflow-hidden mb-3 bg-white click" id="${productId}">
         <div class="col-3 p-8">
         <img class="img-fluid" src="${products.image}" alt="">
   
         </div>
         <div class="col-9 d-flex flex-column justify-content-between">
-          <div class="productBody">
+          <div class="productBody product">
             <h3>${products.name}</h3>
             <p>${products.description}</p>
           </div>
@@ -77,11 +97,31 @@ function showProductsList(){
             </div>
           </div>
         </div>
+        
       </div>
-      ` 
+      `;
+
+      console.log(productId);
+
     } 
-    
+
+    let product = document.getElementsByClassName("click");
+
+    console.log(product);   
+  //agrego un evento click a cada producto
+      for(let i = 0; i < product.length; i++){
+        product[i].addEventListener('click', function () {
+          console.log("click");
+  //gurado el identificador del producto en el local storage
+          localStorage.setItem("id", currentProductsArray[i].id); 
+  //redirijo a product-info
+          window.location = "product-info.html";
+        })
+      }
   }
+
+
+
 
   function sortAndShowProducts(sortCriteria, productsArray){
     currentSortCriteria = sortCriteria;
@@ -97,20 +137,7 @@ function showProductsList(){
 
 
 document.addEventListener('DOMContentLoaded', function(e) {
-//la variable "categoria" contiene el item "catID" del local storage. Modifico la variable url para que en lugar de ir directo a la url de los autos utilice la variable categoría, concatenando la url geneal de productos ("PRODUCTS_URL"), definida en el init + la variable categoría recién definida + la extensión .json de la url ("EXT_TYPE"), definida en el init. 
-  //la variable url quedaría así: https://japceibal.github.io/emercado-api/cats_products/ + catID + .json
-  let categoria = localStorage.getItem('catID');
-  let url = PRODUCTS_URL + categoria + EXT_TYPE;
-    
-  getJSONData(url).then(function(resultObj){
-    if (resultObj.status === "ok"){
-      console.log(resultObj.data);
-      document.getElementById('products-category').innerHTML += resultObj.data.catName;
 
-      currentProductsArray = resultObj.data.products;
-      showProductsList();
-    }
-  })
 
 })
 
@@ -176,7 +203,16 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log("click");
     });
 
-     
+
 
 })
+
+
+
+
+
+// document.querySelector(`#${productId}`).addEventListener("click", function(){
+//  console.log("holaaaa");
+// })
+
 
